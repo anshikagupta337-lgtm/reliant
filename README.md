@@ -1,6 +1,5 @@
 # Reliant
-
-**Find flaky tests and slow builds in GitHub Actions, and put a ₹ figure on the waste.**
+![CI](https://github.com/anshikagupta337-lgtm/reliant/actions/workflows/ci.yml/badge.svg)**Find flaky tests and slow builds in GitHub Actions, and put a ₹ figure on the waste.**
 
 ## Problem → Solution → Result
 

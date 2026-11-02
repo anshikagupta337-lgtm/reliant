@@ -21,6 +21,23 @@
 
 **A mistake worth knowing about:** looking only at the latest attempt, pytorch seemed to have 6 to 8 flaky candidates. Checking attempt 1 showed they were all `action_required`, meaning a maintainer had to approve the run. Those are not retries. Reliant now checks attempt 1 of every re-run, and a test covers this case.
 
+## Slowest jobs and steps
+
+grafana/grafana, Integration Tests workflow, 15 completed runs, 1 to 7 October 2026. Each job has 16 shards, so every row was timed 240 times.
+
+| Job / step | Average | Max |
+|---|---|---|
+| MySQL Enterprise | 11.1 min | 18.9 min |
+| Postgres Enterprise | 10.8 min | 18.5 min |
+| Sqlite Enterprise | 8.0 min | 13.2 min |
+| MySQL Enterprise > Run tests | 8.4 min | 15.5 min |
+| Postgres Enterprise > Run tests | 8.3 min | 15.3 min |
+| Sqlite Enterprise > Setup Go | 1.0 min | 1.7 min |
+
+- Running the tests is about three quarters of each job.
+- Setup Go takes about a minute on every shard. This is worth checking for caching, but it is a lead, not a verified fix.
+- Shards run in parallel, so one run's wall-clock time is set by its slowest shard, not by the average.
+- One workflow, one week, 15 runs. Failed or cancelled runs are included, so these are not a full picture of the repo.
 ## How it works
 
 ```

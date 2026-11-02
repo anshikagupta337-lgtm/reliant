@@ -63,7 +63,7 @@ Never put the token in a file or commit it.
 - One week, newest 500 finished runs per repo. Not the full history.
 - Failures are counted per workflow run, not per individual test.
 - Same commit with a success and a failure can also come from infrastructure problems, manual re-runs or separate pushes. Treat it as a strong signal, not proof.
-- Run duration is not measured automatically yet, so minutes lost is an assumption.
+- Run duration is measured only by the separate slow-steps tool (SlowSteps.java), for one workflow at a time. The minutes lost per flaky failure in the cost calculator is still an assumption. The one verified example took 15m 11s.
 - ₹ figures are estimates based on assumed pay and time. They are not exact savings.
 - GitHub keeps logs for a limited time, so old data may be missing.
 

@@ -1,5 +1,14 @@
 # Reliant
-![CI](https://github.com/anshikagupta337-lgtm/reliant/actions/workflows/ci.yml/badge.svg)**Find flaky tests and slow builds in GitHub Actions, and put a ₹ figure on the waste.**
+
+![CI](https://github.com/anshikagupta337-lgtm/reliant/actions/workflows/ci.yml/badge.svg)
+
+**Find flaky tests and slow builds in GitHub Actions, and put a ₹ figure on the waste.**
+
+![Dashboard: headline numbers](docs/dashboard-1.png)
+
+![Dashboard: five repos compared](docs/dashboard-2.png)
+
+![Dashboard: slowest jobs and steps](docs/dashboard-3.png)
 
 ## Problem → Solution → Result
 
@@ -38,6 +47,7 @@ grafana/grafana, Integration Tests workflow, 15 completed runs, 1 to 7 October 2
 - Setup Go takes about a minute on every shard. This is worth checking for caching, but it is a lead, not a verified fix.
 - Shards run in parallel, so one run's wall-clock time is set by its slowest shard, not by the average.
 - One workflow, one week, 15 runs. Failed or cancelled runs are included, so these are not a full picture of the repo.
+
 ## How it works
 
 ```
@@ -49,11 +59,12 @@ GitHub REST API  ->  FetchRuns.java  ->  Analysis.java  ->  dashboard
 - A run is counted as flaky via re-run when attempt 1 = `failure` and the latest attempt = `success`.
 - `action_required` on attempt 1 is counted as an approval wait, not a retry.
 - Cost = flaky failures x minutes lost x engineers waiting x hourly rate.
+- `SlowSteps.java` ranks the slowest jobs and steps of one workflow from real start and end times.
 
 ## Run it
 
 1. Create a fine-grained GitHub token (public repositories, read-only).
-2. Double-click `run.bat`, paste the token when asked (it is hidden and never saved to a file).
+2. Double-click `run.bat` for the flaky analysis, or `run-slow.bat` for the slowest jobs and steps. Paste the token when asked (it is hidden and never saved to a file).
 3. Tests: `mvn clean test`
 
 Never put the token in a file or commit it.

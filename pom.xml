@@ -11,6 +11,7 @@
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <app.main>reliant.FetchRuns</app.main>
     </properties>
 
     <dependencies>
@@ -45,7 +46,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.0</version>
                 <configuration>
-                    <mainClass>reliant.FetchRuns</mainClass>
+                    <mainClass>${app.main}</mainClass>
                 </configuration>
             </plugin>
         </plugins>
